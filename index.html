@@ -181,7 +181,7 @@ const X={
   steps:["Seat set so the handles line up with mid-chest.","Feet flat, back and head on the pad, shoulders down.","Push out until arms are nearly straight. Don't lock elbows.","Lower for a slow 3 count until the chest stretches."],tip:"The arms work independently, so push both evenly.",
   a:{h:[80,138],t:0,...LEGS_SEAT,aN:{to:[93,100]},aF:{to:[95,102]}},b:{aN:{to:[132,96]},aF:{to:[134,98]}},
   back:(j,t)=>stack(20,t)+upright(48,22)+ln([50,24],[112,24],6,EQ)+backpad+seat,front:j=>ln([108,26],j.haN,5,"#8a93a3")+handle(j)},
- pulldown:{name:"Lat pulldown",st:"GS99 high pulley + long lat bar",sets:"3",reps:"10–12",rest:"90s",
+ pulldown:{name:"Lat pulldown",st:"GS99 high pulley + EZ lat bar",sets:"3",reps:"10–12",rest:"90s",
   steps:["Sit facing the stack, grip just wider than shoulders.","Lean back slightly, chest up.","Pull the bar to your upper chest, elbows down to your sides.","Let it rise slowly until arms are straight and lats stretch."],
   a:{h:[80,138],t:-4,...LEGS_SEAT,aN:{to:[86,35]},aF:{to:[88,36]}},b:{t:-12,aN:{to:[78,92]},aF:{to:[80,93]}},
   back:(j,t)=>stack(160,t)+upright(150,8)+ln([60,10],[152,10],6,EQ)+pulley([88,12])+cable([88,16],j.haN)+seat+circ([112,124],5,EQD,EQ,2),front:handle},
@@ -193,14 +193,23 @@ const X={
   steps:["Knees in line with the pivot, roller on your lower shins.","Hold the side handles and sit tall.","Straighten your legs fully and squeeze for 1 second.","Lower for a slow 3 count."],
   a:{h:[80,138],t:0,lN:{a:[90,-8]},lF:{a:[90,-8]},aN:{to:[87,141]},aF:{to:[89,141]}},b:{lN:{a:[90,78]},lF:{a:[90,78]}},
   back:(j,t)=>stack(20,t)+backpad+seat+ln(j.knN,j.ftN,4,EQ),front:j=>circ([j.ftN[0]+j.fdN[0]*7,j.ftN[1]+j.fdN[1]*7-2],6.5,EQD,"#8a93a3",2.5)},
- row:{name:"Seated cable row",st:"GS99 low pulley + V-handle",sets:"3",reps:"10–12",rest:"90s",
-  steps:["Sit on a mat, feet against the frame, knees soft.","Sit tall, arms straight out in front.","Pull the handle to your belly button and squeeze your shoulder blades.","Reach forward slowly. Don't round your lower back."],
+ legpress:{name:"Leg press",st:"GS99 leg press station",sets:"3",reps:"10–15",rest:"90s",
+  steps:["Sit with your back flat on the pad, feet shoulder width on the footplate.","Start with your knees bent to about 90°. Move the footplate if they're tighter than that.","Push through your heels until your legs are nearly straight. Don't lock your knees.","Come back slowly for a 3 count."],tip:"Your main leg exercise. Keep your lower back on the pad the whole time.",
+  a:{h:[80,138],t:-10,lN:{to:[122,126],f:-82},lF:{to:[124,130],f:-82},aN:{to:[88,146]},aF:{to:[90,146]}},b:{lN:{to:[155,122],f:-82},lF:{to:[157,126],f:-82}},
+  back:(j,t)=>stack(2,t)+tube([56,84],[56,150],4)+pad(57,78,9,66)+seat+tube([j.ftN[0]+10,j.ftN[1]+4],[150,184],5)+ln([138,186],[168,186],3.5,STD),
+  front:j=>ln([j.ftN[0]+9,j.ftN[1]-20],[j.ftN[0]+11,j.ftN[1]+14],9,OUT)+ln([j.ftN[0]+9,j.ftN[1]-20],[j.ftN[0]+11,j.ftN[1]+14],6,"#8a93a3")},
+ legcurl:{name:"Standing leg curl",st:"GS99 leg developer, lower roller",sets:"3",reps:"12–15 each leg",rest:"60s",
+  steps:["Stand facing the machine and hold the frame.","Hook the back of one ankle under the lower roller.","Curl your heel up towards your bum, keeping your thigh still.","Lower slowly for a 3 count. Do all reps, then swap legs."],tip:"The chart on the weight stack cover shows the exact set-up for your machine.",
+  a:{h:[98,100],t:6,lN:{a:[2,2]},lF:{to:[100,180]},aN:{to:[146,84]},aF:{to:[146,88]}},b:{lN:{a:[2,-104]}},
+  back:(j,t)=>stack(164,t)+upright(148,30)+ln([150,150],[j.ftN[0]-9,j.ftN[1]-3],4,EQ),front:j=>circ([j.ftN[0]-9,j.ftN[1]-3],6.5,EQD,"#8a93a3",2.5)},
+ row:{name:"Seated cable row",st:"GS99 low pulley + short straight bar",sets:"3",reps:"10–12",rest:"90s",
+  steps:["Clip the short bar to the low pulley, at floor level below the leg rollers.","Sit on a mat facing it, feet braced on the frame, knees soft.","Pull the bar to your belly button and squeeze your shoulder blades.","Reach forward slowly. Don't round your lower back."],
   a:{h:[62,168],t:14,lN:{to:[134,166],f:-80},lF:{to:[134,162],f:-80},aN:{to:[122,134]},aF:{to:[123,135]}},b:{t:-6,aN:{to:[80,138]},aF:{to:[81,139]}},
   back:(j,t)=>stack(164,t)+upright(152)+ln([146,150],[146,184],5,EQ)+pulley([150,140])+cable([146,140],j.haN)+pad(34,181,70,5),front:handle},
  pec:{view:"front",pads:1,name:"Pec dec",st:"GS99 pec dec station",sets:"2",reps:"12–15",rest:"60s",
   steps:["Seat set so the arm pads are at chest height.","Forearms on the pads, back flat.","Bring the pads together in front and squeeze for 1 second.","Open slowly until the chest stretches."],
   a:{el:[50,86],ha:[50,60]},b:{el:[89,98],ha:[92,73]}},
- curl:{name:"Cable curl",st:"GS99 low pulley + straight bar",sets:"2",reps:"12",rest:"60s",
+ curl:{name:"Cable curl",st:"GS99 low pulley + short straight bar",sets:"2",reps:"12",rest:"60s",
   steps:["Stand facing the low pulley, palms up, elbows at your sides.","Curl up to your shoulders without swinging.","Lower slowly for 3 seconds."],
   a:{h:[88,100],t:0,...LEGS_STAND(88),aN:{a:[4,14]},aF:{a:[6,16]}},b:{aN:{a:[8,152]},aF:{a:[10,154]}},
   back:(j,t)=>stack(164,t)+upright(152)+pulley([148,178])+cable([146,176],j.haN),front:handle},
@@ -211,7 +220,7 @@ const X={
  reardelt:{view:"front",grip:1,name:"Rear-delt fly",st:"GS99 pec dec, reversed",sets:"3",reps:"12–15",rest:"60s",
   steps:["Set the pec dec arms to the rear-delt position.","Sit facing the pad, chest against it.","From arms out in front, push the handles back and out in a wide arc.","Squeeze the back of your shoulders, return slowly."],
   a:{el:[86,86],ha:[95,82]},b:{el:[55,78],ha:[30,80]}},
- pullthrough:{name:"Cable pull-through",st:"GS99 low pulley + rope",sets:"3",reps:"12–15",rest:"60s",
+ pullthrough:{name:"Cable pull-through",st:"GS99 low pulley + D-handle",sets:"3",reps:"12–15",rest:"60s",
   steps:["Face away from the pulley, cable between your legs.","Step forward 2 paces, feet shoulder width.","Push your hips back with a flat back and let the cable pull your hands through.","Snap your hips forward and squeeze your glutes to stand tall."],tip:"It's a hip hinge, not a squat. Knees only bend a little.",
   a:{h:[84,104],t:62,...LEGS_STAND(92),aN:{to:[96,126]},aF:{to:[97,127]}},b:{h:[98,100],t:2,aN:{to:[102,104]},aF:{to:[103,105]}},
   back:(j,t)=>stack(2,t)+upright(28)+pulley([36,176])+cable([40,176],j.haN),front:handle},
@@ -222,7 +231,7 @@ const X={
  pulldown2:{name:"Lat pulldown, close grip",st:"GS99 high pulley + lat bar",sets:"3",reps:"10–12",rest:"90s",
   steps:["Closer grip this time, palms facing you.","Pull to your upper chest, elbows down and back.","Slow on the way up."]},
  legext2:{name:"Leg extension",st:"GS99 leg developer",sets:"3",reps:"12–15",rest:"60s",steps:["Same setup as Session A.","Full squeeze at the top for 1 second.","Slow 3-count lowering."]},
- pushdown:{name:"Triceps pushdown",st:"GS99 high pulley + rope or short bar",sets:"2",reps:"12",rest:"60s",
+ pushdown:{name:"Triceps pushdown",st:"GS99 high pulley + short straight bar",sets:"2",reps:"12",rest:"60s",
   steps:["Face the high pulley, elbows pinned to your sides.","Push down until your arms are straight.","Let it rise slowly to chest height."],
   a:{h:[88,100],t:8,...LEGS_STAND(90),aN:{a:[2,128]},aF:{a:[4,130]}},b:{aN:{a:[2,8]},aF:{a:[4,10]}},
   back:(j,t)=>stack(164,t)+upright(152,8)+ln([104,10],[154,10],6,EQ)+pulley([117,12])+cable([117,16],j.haN),front:handle},
@@ -238,7 +247,7 @@ const X={
  warmset:{name:"Warm-up set",st:"First GS99 exercise",sets:"1–2",reps:"10",rest:"60s",steps:["Do the first exercise at about half your working weight.","Then start your real sets."]},
  plank:{loop:1,name:"Plank",st:"Floor mat",sets:"3",reps:"30–45s hold",rest:"45s",steps:["Elbows under shoulders, body in one straight line.","Squeeze glutes and brace your stomach.","Breathe steadily. Stop when your hips sag."],
   a:{h:[98,157],t:80,lN:{to:[16,181],f:90},lF:{to:[19,181],f:90},aN:{a:[0,90]},aF:{a:[2,90]}},b:{h:[98,155]},back:()=>pad(14,182,172,4)},
- crunch:{name:"Cable crunch",st:"GS99 high pulley + rope",sets:"3",reps:"15",rest:"45s",steps:["Kneel facing the stack, rope held by your forehead.","Curl your ribs down towards your hips.","Hips stay still. Return slowly."],
+ crunch:{name:"Cable crunch",st:"GS99 high pulley + short straight bar",sets:"3",reps:"15",rest:"45s",steps:["Kneel facing the stack, bar held by your forehead.","Curl your ribs down towards your hips.","Hips stay still. Return slowly."],
   a:{h:[70,140],t:10,lN:{a:[8,-90]},lF:{a:[10,-90]},aN:{off:[12,-10]},aF:{off:[13,-9]}},b:{t:68},
   back:(j,t)=>stack(164,t)+upright(152,8)+ln([84,10],[154,10],6,EQ)+pulley([98,12])+cable([98,16],j.haN),front:handle},
  stretch:{name:"Stretch",st:"Floor",sets:"1",reps:"30s each",rest:"–",steps:["Chest stretch in a doorway.","Hamstrings and quads.","Hip flexors in a half-kneel.","Then your lunch box within 30 min."]}
@@ -262,7 +271,7 @@ Object.assign(X,{
 for(const k of["sitstand","kbdl","bridge"])X[k].b=Object.assign({},X[k].a,X[k].b);
 const AV=(k,o)=>Object.assign({},X[k],o),AD={sets:"2–3",reps:"12–15",rest:"60s"};
 Object.assign(X,{
- an_chest:AV("chest",AD),an_pulldown:AV("pulldown",AD),an_row:AV("row",AD),an_legext:AV("legext",AD),an_shoulder:AV("shoulder",AD),
+ an_chest:AV("chest",AD),an_pulldown:AV("pulldown",AD),an_row:AV("row",AD),an_legext:AV("legext",AD),an_legpress:AV("legpress",{sets:"2–3",reps:"12–15",rest:"60s"}),an_shoulder:AV("shoulder",AD),
  an_pd2:AV("pulldown2",AD),an_reardelt:AV("reardelt",AD),an_pushdown:AV("pushdown",{sets:"2",reps:"12–15",rest:"45s"}),
  an_plank:AV("plank",{sets:"2",reps:"20–30s hold",rest:"45s",steps:["Elbows under shoulders, body in one straight line.","Too hard? Drop your knees to the mat.","Breathe steadily. Stop when your hips sag."]}),
  an_ellip:AV("ellip",{reps:"5 min"}),
@@ -271,8 +280,8 @@ Object.assign(X,{
  an_stretch:AV("stretch",{steps:["Chest stretch in a doorway.","Hamstrings and quads.","Hip flexors in a half-kneel."]})
 });
 const AC="#f472b6",AW={
- "1":{title:"Session 1 · Chest, back and legs",list:["an_chest","an_pulldown","sitstand","an_row","an_legext","an_plank"]},
- "2":{title:"Session 2 · Shoulders, hips and arms",list:["an_shoulder","kbdl","an_pd2","bridge","an_reardelt","an_pushdown"]},
+ "1":{title:"Session 1 · Chest, back and legs",list:["an_chest","an_pulldown","an_legpress","an_row","an_legext","an_plank"]},
+ "2":{title:"Session 2 · Shoulders, hips and arms",list:["an_shoulder","an_legpress","kbdl","an_pd2","bridge","an_reardelt","an_pushdown"]},
  C:{title:"Cardio day",list:["an_cardio"]}
 };
 const AWEEK=[["Mon","Session 1",1],["Tue","Elliptical 25–30 min",1],["Wed","Session 2",1],["Thu","Rest. 30 min walk"],["Fri","Session 1 or 2: swap each week",1],["Sat","Elliptical 25–30 min, or a long walk",1],["Sun","Rest"]];
@@ -294,8 +303,8 @@ function renderAnna(){const n=nowUK(),el=document.getElementById("anna"),key=aPi
   live=[...el.querySelectorAll("svg[data-k]")];draw(performance.now(),true)}
 const WARM=["ellip","halo","warmset"];
 const W={
- A:{title:"Session A · Push / Pull / Legs",col:"var(--A)",hex:"#3aa0ff",list:["chest","pulldown","split","legext","row","pec","curl"]},
- B:{title:"Session B · Shoulders / Hinge / Legs",col:"var(--B)",hex:"#ff8a3d",list:["shoulder","reardelt","pullthrough","rdl","legext2","pulldown2","pushdown","swing"]},
+ A:{title:"Session A · Push / Pull / Legs",col:"var(--A)",hex:"#3aa0ff",list:["chest","pulldown","legpress","legext","row","pec","curl"]},
+ B:{title:"Session B · Shoulders / Hinge / Legs",col:"var(--B)",hex:"#ff8a3d",list:["shoulder","reardelt","legpress","legcurl","pullthrough","pulldown2","pushdown","swing"]},
  C:{title:"Elliptical + core",col:"var(--C)",hex:"#a78bfa",list:["ellip","plank","crunch"]}
 };
 

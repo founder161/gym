@@ -72,6 +72,22 @@
   th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
   th{color:var(--muted);font-weight:500}
   .g{color:var(--gym);font-weight:600}
+  @media(max-width:380px){
+    body{padding-left:10px;padding-right:10px;overflow-wrap:anywhere}
+    h1{font-size:22px}
+    ul.day li{flex-direction:column;gap:2px;padding:10px 12px}
+    ul.day li .t{min-width:0}
+    table,tbody,tr,td{display:block;width:auto}
+    th{display:none}
+    tr{border-bottom:1px solid var(--line);padding:6px 0}
+    td{border:0;padding:2px 0}
+    .shop label{flex-wrap:wrap;padding:10px}
+    .shop .it{flex:1 1 60%;min-width:0}
+    .shop .pr{margin-left:34px}
+    .plain{padding-left:16px}
+    .ex{padding:10px}
+    .tab{min-width:44px;padding:8px 2px}
+  }
 </style>
 </head>
 <body>

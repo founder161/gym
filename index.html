@@ -445,7 +445,8 @@ function draw(ts,force){if(!force&&(!playing||ts-last<33))return;last=ts;
   for(const el of live){const e=X[el.dataset.k],t=phase(ts,e.loop);el.innerHTML=e.view==="front"?frontFig(e,t,el.dataset.c,el.dataset.f):sideFig(e,t,el.dataset.c,el.dataset.f)}}
 function tick(ts){draw(ts);requestAnimationFrame(tick)}
 render();setView();requestAnimationFrame(tick);setInterval(()=>render(true),60000);
-if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>r.update()).catch(()=>{}));
+if("serviceWorker" in navigator){let had=!!navigator.serviceWorker.controller,done=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(had&&!done){done=true;location.reload()}had=true})}
 </script>
 </body>
 </html>

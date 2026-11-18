@@ -162,13 +162,13 @@ function sideFig(ex,t,accent,fem){const j=solve(lerp(ex.a,ex.b,t)),far=fem?"#1d2
   s+=grp(armP(j.sh,j.elN,j.haN,SKN,1));
   return s+(ex.front?ex.front(j,t):"")}
 function frontFig(ex,t,accent,fem){const p=lerp(ex.a,ex.b,t),m=q=>[200-q[0],q[1]],sh=fem?[81,78]:[79,78],cl=fem?"#2b3447":SHN,hc=fem?HAIRF:HAIR;
-  let s=floor+tube([36,20],[164,20],6)+tube([100,20],[100,58],5)+pad(82,56,36,84)+tube([100,150],[100,185],5)+ln([84,186],[116,186],3.5,STD)+pad(70,140,60,9);
+  let s=floor+(ex.stand?(ex.back?ex.back(p,t):""):tube([36,20],[164,20],6)+tube([100,20],[100,58],5)+pad(82,56,36,84)+tube([100,150],[100,185],5)+ln([84,186],[116,186],3.5,STD)+pad(70,140,60,9));
   for(const fn of[q=>q,m]){const hp=fn([91,131]),kn=fn([84,152]),ft=fn([84,178]);s+=grp([[hp,kn,fem?15.5:16.5,12,SKN],[kn,ft,11.5,7.5,SKN],[hp,fem?kn:mid(hp,kn,.7),fem?16:17,fem?12.4:14,cl],...(fem?[[kn,mid(kn,ft,.7),11.9,9,cl]]:[]),[ft,[ft[0],ft[1]+5],8.5,9.5,"#e5e7eb"]])}
   const tp=fem?"80,70 120,70 113,100 117,132 83,132 87,100":"77,70 123,70 117,102 114,132 86,132 83,102";
   s+=`<polygon points="${tp}" fill="${accent}" stroke="${OUT}" stroke-width="3.5" stroke-linejoin="round"/>`+seg([100,60],[100,68],8,SKN);
   if(fem)s+=seg([90,46],[89,64],6,hc)+seg([110,46],[111,64],6,hc);
   s+=circ([100,50],12.5,OUT)+circ([100,50],11,SKN)+`<path d="M90,${fem?49:46} A10.5 10.5 0 0 1 110,${fem?49:46}" stroke="${hc}" stroke-width="${fem?6.5:5}" fill="none" stroke-linecap="round"/>`+circ([96,51],1.1,"#2a211d")+circ([104,51],1.1,"#2a211d")+ln([97.5,56],[102.5,56],1,"#a86f5a");
-  for(const fn of[q=>q,m]){const el=fn(p.el),ha=fn(p.ha),o=fn([p.el[0]-7,0])[0]-el[0];
+  for(const fn of[q=>q,m]){const pp=(ex.one&&fn===m)?ex.rest:p,el=fn(pp.el),ha=fn(pp.ha),o=fn([pp.el[0]-7,0])[0]-el[0];
     if(ex.pads)s+=ln([el[0]+o,22],[el[0]+o,ha[1]],2.5,STD)+ln([el[0]+o,el[1]+3],[ha[0]+o,ha[1]-3],9.5,OUT)+ln([el[0]+o,el[1]+3],[ha[0]+o,ha[1]-3],7,UPH)+ln([el[0]+o,el[1]+3],[ha[0]+o,ha[1]-3],1,"#596173");
     if(ex.grip)s+=ln([ha[0],22],[ha[0],ha[1]-8],2.5,STD)+ln([ha[0],ha[1]-8],[ha[0],ha[1]+8],4.5,"#cbd5e1");
     s+=grp(armP(fn(sh),el,ha,SKN,1))}
@@ -203,6 +203,30 @@ const X={
   steps:["Stand facing the machine and hold the frame.","Hook the back of one ankle under the lower roller.","Curl your heel up towards your bum, keeping your thigh still.","Lower slowly for a 3 count. Do all reps, then swap legs."],tip:"The chart on the weight stack cover shows the exact set-up for your machine.",
   a:{h:[98,100],t:6,lN:{a:[2,2]},lF:{to:[100,180]},aN:{to:[146,84]},aF:{to:[146,88]}},b:{lN:{a:[2,-104]}},
   back:(j,t)=>stack(164,t)+upright(148,30)+ln([150,150],[j.ftN[0]-9,j.ftN[1]-3],4,EQ),front:j=>circ([j.ftN[0]-9,j.ftN[1]-3],6.5,EQD,"#8a93a3",2.5)},
+ atw:{name:"Kettlebell around-the-world",st:"12kg kettlebell",sets:"2",reps:"10 each way",rest:"30s",
+  steps:["Stand tall, feet hip width, stomach braced.","Pass the bell round your waist, swapping hands in front and behind.","Hips and shoulders stay square. Only your arms move.","Do 10 circles one way, then 10 the other."],
+  a:{h:[98,100],t:0,...LEGS_STAND(98),aN:{off:[14,44]},aF:{off:[12,44]}},b:{aN:{off:[-16,44]},aF:{off:[-14,44]}},front:j=>kb(j.haN)},
+ rtwist:{name:"Russian twist",st:"12kg kettlebell + floor mat",sets:"2",reps:"10 each side",rest:"30s",
+  steps:["Sit with knees bent and heels on the floor. Lean back to about 45°.","Hold the bell at your chest in both hands.","Turn your shoulders to tap the bell beside one hip, then the other.","Keep your chest up and move slowly."],tip:"If your lower back complains, do it without the bell first.",
+  a:{h:[80,172],t:-38,lN:{to:[150,180]},lF:{to:[146,180]},aN:{off:[30,24]},aF:{off:[30,24]}},b:{aN:{off:[20,40]},aF:{off:[22,38]}},back:()=>pad(14,182,172,4),front:j=>kb(j.haN,[.3,.95])},
+ woodchop:{name:"Cable wood chop",st:"GS99 high pulley + D-handle",sets:"2",reps:"12 each side",rest:"45s",
+  steps:["Stand side-on to the high pulley, feet wider than your hips.","Hold the handle in both hands, arms up towards the pulley.","Pull it down and across your body to the opposite hip, turning your shoulders.","Return slowly. Your arms stay nearly straight throughout."],
+  a:{h:[92,100],t:4,...LEGS_STAND(92),aN:{to:[124,44]},aF:{to:[126,46]}},b:{t:14,aN:{to:[102,104]},aF:{to:[104,106]}},
+  back:(j,t)=>stack(164,t)+upright(152,8)+ln([104,10],[154,10],6,EQ)+pulley([136,12])+cable([136,16],j.haN),front:handle},
+ latraise:{view:"front",stand:1,one:1,name:"Cable lateral raise",st:"GS99 low pulley + D-handle",sets:"3",reps:"12–15 each arm",rest:"45s",
+  steps:["Stand side-on to the low pulley. Hold the handle in your far hand, cable across your front.","With a slight bend in the elbow, raise your arm out to the side to shoulder height.","Pause for 1 second. Don't shrug.","Lower for a slow 3 count."],tip:"Go light. The first plate is plenty to start.",
+  a:{el:[76,104],ha:[74,128]},b:{el:[54,82],ha:[30,80]},rest:{el:[75,104],ha:[74,128]},
+  back:p=>tube([178,60],[178,185],5)+pulley([171,178])+cable([167,177],p.ha)+circ(p.ha,5,"#cbd5e1",OUT,1.5)},
+ preacher:{name:"Preacher curl",st:"GS99 biceps pad + low pulley + short straight bar",sets:"3",reps:"10–12",rest:"60s",
+  steps:["Set the biceps pad so your armpits sit over its top edge.","Sit down with your upper arms flat on the pad, palms up on the bar.","Curl the bar up to your shoulders without lifting your elbows.","Lower for a slow 3 count until your arms are nearly straight."],
+  a:{h:[80,138],t:10,...LEGS_SEAT,aN:{a:[58,72]},aF:{a:[60,74]}},b:{aN:{a:[58,168]},aF:{a:[60,170]}},
+  back:(j,t)=>stack(164,t)+upright(152)+pulley([148,178])+cable([146,176],j.haN)+seat+tube([116,150],[116,116],4)+ln([j.sh[0]+3,j.sh[1]+13],[j.elN[0]+7,j.elN[1]+10],11,OUT)+ln([j.sh[0]+3,j.sh[1]+13],[j.elN[0]+7,j.elN[1]+10],8,UPH),front:handle},
+ goblet:{name:"Goblet squat",st:"12kg kettlebell",sets:"4–5 rounds",reps:"12",rest:"–",
+  steps:["Hold the bell at your chest, feet shoulder width.","Sit your hips back and down until your thighs are level.","Chest up, heels flat.","Drive up through your heels."],
+  a:{h:[98,100],t:3,lN:{to:[108,180]},lF:{to:[102,180]},aN:{off:[14,17]},aF:{off:[16,17]}},b:{h:[82,134],t:22},front:j=>kb(j.haN)},
+ kbrowpress:{name:"Upright row into press",st:"12kg kettlebell",sets:"4–5 rounds",reps:"12",rest:"–",
+  steps:["Hold the bell in both hands at your hips.","Pull it up to your chest, elbows high.","Turn your hands under it and press it overhead.","Lower to your chest, then back to your hips."],
+  a:{h:[98,100],t:0,...LEGS_STAND(98),aN:{off:[6,50]},aF:{off:[4,50]}},b:{aN:{off:[8,-36]},aF:{off:[6,-36]}},front:j=>kb(j.haN,j.haN[1]<j.sh[1]?[0,-.05]:[0,1])},
  row:{name:"Seated cable row",st:"GS99 low pulley + short straight bar",sets:"3",reps:"10–12",rest:"90s",
   steps:["Clip the short bar to the low pulley, at floor level below the leg rollers.","Sit on a mat facing it, feet braced on the frame, knees soft.","Pull the bar to your belly button and squeeze your shoulder blades.","Reach forward slowly. Don't round your lower back."],
   a:{h:[62,168],t:14,lN:{to:[134,166],f:-80},lF:{to:[134,162],f:-80},aN:{to:[122,134]},aF:{to:[123,135]}},b:{t:-6,aN:{to:[80,138]},aF:{to:[81,139]}},
@@ -271,6 +295,8 @@ Object.assign(X,{
 });
 for(const k of["sitstand","kbdl","bridge"])X[k].b=Object.assign({},X[k].a,X[k].b);
 const AV=(k,o)=>Object.assign({},X[k],o),AD={sets:"2–3",reps:"12–15",rest:"60s"};
+Object.assign(X,{x_halo:AV("halo",{name:"Curl into halo",sets:"4–5 rounds",reps:"12",rest:"–",steps:["Curl the bell from your hips up to your chin.","Circle it once round your head, close to your neck.","Lower it back to your hips. That's 1 rep.","Swap the direction of the circle each rep."]}),x_swing:AV("swing",{sets:"4–5 rounds",reps:"25",rest:"–"}),x_atw:AV("atw",{sets:"4–5 rounds",reps:"10 each way",rest:"1 min, then next round"})});
+
 Object.assign(X,{
  an_chest:AV("chest",AD),an_pulldown:AV("pulldown",AD),an_row:AV("row",AD),an_legext:AV("legext",AD),an_legpress:AV("legpress",{sets:"2–3",reps:"12–15",rest:"60s"}),an_shoulder:AV("shoulder",AD),
  an_pd2:AV("pulldown2",AD),an_reardelt:AV("reardelt",AD),an_pushdown:AV("pushdown",{sets:"2",reps:"12–15",rest:"45s"}),
@@ -286,7 +312,7 @@ const AC="#f472b6",AW={
  C:{title:"Cardio day",list:["an_cardio"]}
 };
 const AWEEK=[["Mon","Session 1",1],["Tue","Elliptical 25–30 min",1],["Wed","Session 2",1],["Thu","Rest. 30 min walk"],["Fri","Session 1 or 2: swap each week",1],["Sat","Elliptical 25–30 min, or a long walk",1],["Sun","Rest"]];
-let aPick=null;
+let aPick=null,xp=false;
 function annaToday(n){const p=Math.floor((Date.now()-Date.UTC(2026,10,16))/6048e5)%2===0;return{Mon:"1",Wed:"2",Fri:p?"1":"2",Tue:"C",Sat:"C"}[n.day]||"1"}
 function renderAnna(){const n=nowUK(),el=document.getElementById("anna"),key=aPick||annaToday(n),w=AW[key],cw={col:AC,hex:AC,fem:1},gw={col:"#8a93a3",hex:"#8a93a3",fem:1};
   let h=`<h2 style="margin-top:6px">Anna's plan</h2><p class="sub">Strength 3 days, cardio 2 days, a walk on the rest</p>`;
@@ -304,8 +330,9 @@ function renderAnna(){const n=nowUK(),el=document.getElementById("anna"),key=aPi
   live=[...el.querySelectorAll("svg[data-k]")];draw(performance.now(),true)}
 const WARM=["ellip","halo","warmset"];
 const W={
- A:{title:"Session A · Push / Pull / Legs",col:"var(--A)",hex:"#3aa0ff",list:["chest","pulldown","legpress","legext","row","pec","curl"]},
- B:{title:"Session B · Shoulders / Hinge / Legs",col:"var(--B)",hex:"#ff8a3d",list:["shoulder","reardelt","legpress","legcurl","pullthrough","pulldown2","pushdown","swing"]},
+ A:{title:"Session A · Push / Pull / Legs",col:"var(--A)",hex:"#3aa0ff",list:["chest","pulldown","legpress","legext","row","pec","preacher"],fin:["atw","rtwist"]},
+ B:{title:"Session B · Shoulders / Hinge / Legs",col:"var(--B)",hex:"#ff8a3d",list:["shoulder","latraise","reardelt","legpress","legcurl","pullthrough","pulldown2","pushdown"],fin:["woodchop","atw"]},
+ X:{title:"Express · 20 min, 1 kettlebell",col:"var(--C)",hex:"#a78bfa",list:["x_halo","kbrowpress","x_swing","goblet","x_atw"]},
  C:{title:"Elliptical + core",col:"var(--C)",hex:"#a78bfa",list:["ellip","plank","crunch"]}
 };
 
@@ -418,16 +445,20 @@ function card(key,i,w){const e=X[key],fig=!!e.a;
   return `<div class="ex ${fig?"":"nofig"}">${fig?`<svg viewBox="0 0 200 200" data-k="${key}" data-c="${w.hex}" data-f="${w.fem?1:""}" role="img" aria-label="${e.name} demonstration"></svg>`:""}<div><div class="nm"><span class="n" style="background:${w.col}">${i}</span>${e.name}</div><div class="st">${e.st}</div><div class="dose"><span><b>Sets</b>${e.sets}</span><span><b>Reps</b>${e.reps}</span><span><b>Rest</b>${e.rest}</span></div><ol>${e.steps.map(s=>`<li>${s}</li>`).join("")}</ol>${e.tip?`<div class="tip">⚠ ${e.tip}</div>`:""}${fig?`<a class="vid" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent(e.name.replace(", close grip"," close grip")+(/GS99/.test(e.st)?" multi gym how to":" how to proper form"))}">▶ Watch a real video</a>`:""}</div></div>`}
 function renderWorkout(n){const el=document.getElementById("workout");let key={Thu:"A",Sat:"B",Tue:"C"}[sel];
   if(sel==="Mon")key=monPick||mondaySession(n);
+  const base=key;if(key&&key!=="C"&&xp)key="X";
   if(!key){el.innerHTML=`<h2>Training</h2><div class="rest">${sel==="Sun"?"No gym today. Meal prep at 10:00 and measure your waist.":"Rest day. No training."}</div>`;live=[];return}
   const w=W[key];let h=`<h2>${w.title}</h2><div class="wohead">`;
   if(sel==="Mon")h+=`<button class="pill ${key==="A"?"on":""}" data-s="A">Session A</button><button class="pill ${key==="B"?"on":""}" data-s="B">Session B</button>`;
+  if(base!=="C")h+=`<button class="pill ${xp?"on":""}" id="xp">⚡ Express 20 min</button>`;
   h+=`<button class="pill" id="pp">${playing?"⏸ Pause demos":"▶ Play demos"}</button></div>`;
-  if(key!=="C"){h+=`<div class="sec">Warm-up · 8 min</div>`+WARM.map((k,i)=>card(k,i+1,{col:"#8a93a3",hex:"#8a93a3"})).join("")+`<div class="sec">Main work · every set stops 1–2 reps short of failure</div>`}
+  if(key==="X")h+=`<div class="sec">Circuit · all 5 moves back to back, rest 1 minute, 4–5 rounds</div>`;else if(key!=="C"){h+=`<div class="sec">Warm-up · 8 min</div>`+WARM.map((k,i)=>card(k,i+1,{col:"#8a93a3",hex:"#8a93a3"})).join("")+`<div class="sec">Main work · every set stops 1–2 reps short of failure</div>`}
   h+=w.list.map((k,i)=>card(k,i+1,w)).join("");
+  if(w.fin)h+=`<div class="sec">Core finisher · 6 min</div>`+w.fin.map((k,i)=>card(k,w.list.length+i+1,w)).join("");
   if(key!=="C")h+=`<div class="sec">Cool-down · 3 min</div>`+card("stretch","✓",{col:"#7ee0a1",hex:"#7ee0a1"})+`<p class="sub">Hit the top of the rep range on every set, then move the GS99 pin down 1 plate next time.</p>`;
   else h+=`<p class="sub">Elliptical: 30–40 min at an easy, chatty pace. Then 10 min of core.</p>`;
   el.innerHTML=h;
   el.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{monPick=b.dataset.s;renderWorkout(nowUK())});
+  const xb=document.getElementById("xp");if(xb)xb.onclick=()=>{xp=!xp;renderWorkout(nowUK())};
   document.getElementById("pp").onclick=()=>{playing=!playing;document.getElementById("pp").textContent=playing?"⏸ Pause demos":"▶ Play demos"};
   live=[...el.querySelectorAll("svg[data-k]")];draw(performance.now(),true)}
 function render(keep){const n=nowUK();if(!sel)sel=n.day;
